@@ -23,4 +23,5 @@ cv2.imwrite(output_image, image)
 # to run this script
 # goto terminal 
 # python3 scriptname.py 'path to input image' 'path to save image' 1.1
+# for example python3 brightness.py '/home/image.jpg' '/home/new_image.jpg' 1.1
 # above 1.1 is the brightness level we would like to increase
