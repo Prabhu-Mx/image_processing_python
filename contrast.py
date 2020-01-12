@@ -13,15 +13,8 @@ beta = 0 # brightness
 # Read the image file
 image = cv2.imread(args.input)
 
-height = image.shape[0]
-width = image.shape[1]
-depth = image.shape[2]
+# each array element multiply by contrast ratio  and "np.clip" used to set min & max value of the image array
+image = np.clip([pixel_value * args.contrast for pixel_value in image + beta],0, 255)
 
-
-for x in np.arange(height):
-    for y in np.arange(width):
-        for z in np.arange(depth):
-              #print( x, y, z)
-              image [x, y, z] = [pixel_value * (args.contrast) for pixel_value in image([x][y][z])]
-
-#cv2.imwrite(args.output, image)
+#Write image in given path
+cv2.imwrite(args.output, image)
