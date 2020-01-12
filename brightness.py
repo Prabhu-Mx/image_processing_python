@@ -16,7 +16,6 @@ image = cv2.imread(args.input)
 
 height = image.shape[0]
 width = image.shape[1]
-print(image.shape)
 
 for i in np.arange(height):
     for j in np.arange(width):
