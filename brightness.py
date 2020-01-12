@@ -7,20 +7,14 @@ import argparse
 parser = argparse.ArgumentParser(description='Code for Changing the brightness of an image')
 parser.add_argument('--input', help='Path to input image.', default='eli.jpg')
 parser.add_argument('--output',help ='Path to output image', default='new_image.jpg')
-parser.add_argument('--brightness', help = 'Brightness level', default= '1.1', type =float)
+parser.add_argument('--brightness', help = 'Brightness level', default= '1.1', type= float)
 args = parser.parse_args()
-
 
 # Read the image file
 image = cv2.imread(args.input)
 
-height = image.shape[0]
-width = image.shape[1]
-
-for i in np.arange(height):
-    for j in np.arange(width):
-        # each array element multiply by brightness level and "np.clip" used to set min & max value of array 
-        image[i][j] = np.clip([pixel_value * args.brightness for pixel_value in image [i][j]], 0, 255)
+# each array element multiply by brightness level and "np.clip" used to set min & max value of array
+image = np.clip([pixel_value * args.brightness for pixel_value in image], 0, 255)
 cv2.imwrite(args.output, image)
 
 # to run this script
