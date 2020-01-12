@@ -1,27 +1,31 @@
 #!/usr/bin/env python3
 import cv2
 import numpy as np
-import sys
+import argparse
 
-# Assigning command line argv
-input_image = str(sys.argv[1])
-output_image = str(sys.argv[2])
-brightness = float(sys.argv[3])
+# Assigning command line args
+parser = argparse.ArgumentParser(description='Code for Changing the brightness of an image')
+parser.add_argument('--input', help='Path to input image.', default='eli.jpg')
+parser.add_argument('--output',help ='Path to output image', default='new_image.jpg')
+parser.add_argument('--brightness', help = 'Brightness level', default= '1.1', type =float)
+args = parser.parse_args()
+
 
 # Read the image file
-image = cv2.imread(input_image)
+image = cv2.imread(args.input)
 
 height = image.shape[0]
 width = image.shape[1]
+print(image.shape)
 
 for i in np.arange(height):
     for j in np.arange(width):
         # each array element multiply by brightness level and "np.clip" used to set min & max value of array 
-        image[i][j] = np.clip([pixel_value * brightness for pixel_value in image [i][j]], 0, 255)
-cv2.imwrite(output_image, image)
+        image[i][j] = np.clip([pixel_value * args.brightness for pixel_value in image [i][j]], 0, 255)
+cv2.imwrite(args.output, image)
 
 # to run this script
 # goto terminal 
 # python3 scriptname.py 'path to input image' 'path to save image' 1.1
-# for example python3 brightness.py '/home/image.jpg' '/home/new_image.jpg' 1.1
-# above 1.1 is the brightness level we would like to increase
+# for example $python3 brightness.py --input eli.jpg --output /home/new_image.jpg' --brightness 1.1
+
